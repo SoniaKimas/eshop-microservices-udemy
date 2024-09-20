@@ -11,12 +11,14 @@ public class Product : Entity<ProductId>
         ArgumentException.ThrowIfNullOrEmpty(name, nameof(name));
         ArgumentOutOfRangeException.ThrowIfNegativeOrZero(price, nameof(price));
 
-        return new Product
+        var product =new Product
         {
             Id = id,
             Name = name,
             Price = price
         };
+
+        return product;
     }
 
 }

@@ -2,7 +2,7 @@
 
 public class Order :  Aggregate<OrderId>
 {
-    private readonly List<OrderItem> _orderItems;
+    private readonly List<OrderItem> _orderItems = new();
     public IReadOnlyList<OrderItem> OrderItems => _orderItems.AsReadOnly();
 
     public CustomerId CustomerId { get; private set; } = default!;
@@ -28,8 +28,8 @@ public class Order :  Aggregate<OrderId>
         OrderName orderName,
         Address shippingAddress,
         Address billingAddress,
-        Payment payment,
-        OrderStatus status)
+        Payment payment
+      )
     {
         var order = new Order
         {
@@ -39,7 +39,8 @@ public class Order :  Aggregate<OrderId>
             ShippingAddress = shippingAddress,
             BillingAddress = billingAddress,
             Payment = payment,
-            OrderStatus = status
+            OrderStatus = OrderStatus.Pending
+
         };
 
         order.AddDomainEvent(new OrderCreatedEvent(order));   
@@ -47,13 +48,13 @@ public class Order :  Aggregate<OrderId>
         return order;
     }
 
-    public void Update(OrderName orderName, Address shippingAddress, Address billingAddress, Payment payment, OrderStatus status)
+    public void Update(OrderName orderName, Address shippingAddress, Address billingAddress, Payment payment)
     {
         OrderName = orderName;
         ShippingAddress = shippingAddress;
         BillingAddress = billingAddress;
         Payment = payment;
-        OrderStatus = status;
+        OrderStatus = OrderStatus.Pending;
 
         AddDomainEvent(new OrderUpdatedEvent(this));
     }
