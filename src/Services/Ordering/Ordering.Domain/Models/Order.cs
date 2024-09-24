@@ -23,7 +23,7 @@ public class Order :  Aggregate<OrderId>
     }
 
     public static Order Create(
-        OrderId orderId,
+        OrderId id,
         CustomerId customerId,
         OrderName orderName,
         Address shippingAddress,
@@ -33,7 +33,7 @@ public class Order :  Aggregate<OrderId>
     {
         var order = new Order
         {
-            Id = orderId,
+            Id = id,
             CustomerId = customerId,
             OrderName = orderName,
             ShippingAddress = shippingAddress,
@@ -48,13 +48,13 @@ public class Order :  Aggregate<OrderId>
         return order;
     }
 
-    public void Update(OrderName orderName, Address shippingAddress, Address billingAddress, Payment payment)
+    public void Update(OrderName orderName, Address shippingAddress, Address billingAddress, Payment payment, OrderStatus status)
     {
         OrderName = orderName;
         ShippingAddress = shippingAddress;
         BillingAddress = billingAddress;
         Payment = payment;
-        OrderStatus = OrderStatus.Pending;
+        OrderStatus = status;
 
         AddDomainEvent(new OrderUpdatedEvent(this));
     }
