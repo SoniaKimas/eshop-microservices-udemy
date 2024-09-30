@@ -53,7 +53,7 @@ public class CreateOrderHandler(
             );
 
         var order = Order.Create(
-            OrderId.Of(orderDto.Id),
+            OrderId.Of(Guid.NewGuid()),
             CustomerId.Of(orderDto.CustomerId),
             OrderName.Of(orderDto.OrderName),
             shippingAddress,

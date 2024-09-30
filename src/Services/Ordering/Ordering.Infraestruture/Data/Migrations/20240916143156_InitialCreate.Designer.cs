@@ -151,7 +151,7 @@ namespace Ordering.Infraestructure.Data.Migrations
                                 .HasMaxLength(3)
                                 .HasColumnType("nvarchar(3)");
 
-                            b1.Property<string>("CardHolderName")
+                            b1.Property<string>("CardName")
                                 .IsRequired()
                                 .HasMaxLength(50)
                                 .HasColumnType("nvarchar(50)");
