@@ -10,7 +10,7 @@ public record OrderName
     public static OrderName Of(string value)
     {
         ArgumentNullException.ThrowIfNull(value, nameof(value));
-        ArgumentOutOfRangeException.ThrowIfNotEqual(value.Length, DefaultLength);
+        //ArgumentOutOfRangeException.ThrowIfNotEqual(value.Length, DefaultLength);
 
         return new OrderName(value);
     }
